@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>yui3 gallery: uploader</title>
+    <link rel="stylesheet" type="text/css" href="../../style.css" media="screen">
+</head>
+
+<body onload="prettyPrint()"> 
+<a href="http://github.com/sspencer/yui3-gallery"><img style="position: absolute; top: 0; right: 0; border: 0;" 
+    src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
+
+<div id="container">
+    <h1>
+        <a href="http://github.com/sspencer/yui3-gallery">uploader</a>
+        <span class="small">by <a href="http://github.com/sspencer">sspencer</a></span>
+    </h1>
+    
+    <h2>Overview</h2>
+
+    <p>
+
+        Uploader is a <a href="http://yuilibrary.com/">YUI 3</a> gallery project that uses
+        <a href="http://browserplus.org/">BrowserPlus</a> to create an advanced file
+        uploader widget. The Uploader allows you to easily create an advanced file uploader
+        widget that supports native drag+drop from the desktop, multiple file selection from
+        a native file selection dialog, multiple simultaneous uploads (3 files at a time),
+        image resizing, archiving (tar, zip) and compression (bzip2, gzip, zip). Files may
+        be filtered by size and mime type (for example, only image files may be selected).
+
+    </p>
+
+    <p align="center">
+        <img src="uploader-full-reflect.png" width="402" height="265" alt="YUI3 Uploader with BrowserPlus">
+    </p>
+
+    <h2>Getting Started</h2>
+    
+
+    <h3>Include Dependencies</h3>
+
+    <p>
+        Since Uploader is a UI element, uses BrowserPlus and YUI3, it requires 
+        both CSS and JavaScript support files.
+    </p>
+
+<pre class="prettyprint">
+&lt;!-- in HEAD --&gt;
+&lt;link rel="stylesheet" href="assets/uploader.css" type="text/css" charset="utf-8" /&gt;
+
+&lt;!-- in BODY --&gt;
+&lt;script src="http://bp.yahooapis.com/2.7.1/browserplus-min.js"&gt;&lt;/script&gt;
+&lt;script src="http://yui.yahooapis.com/combo?3.0.0/build/yui/yui-min.js"&gt;&lt;/script&gt;
+&lt;script src="gallery-uploader-min.js"&gt;&lt;/script&gt;
+</pre>
+
+    <h3>The YUI Instance</h3>
+
+    <p>
+    Once you have the YUI seed file on your page (yui-min.js), you can create a new YUI instance for your 
+    application to use and populate it with the modules you need, specified as the first set of arguments 
+    to the <a href="http://developer.yahoo.com/yui/3/yui/index.html#use">use method</a>.
+    </p>
+
+<pre class="prettyprint">
+YUI().use('gallery-uploader', function(Y) {
+    // Uploader available and ready for use
+}); 
+</pre>
+
+    <h3>Creating a Uploader Widget</h3>
+
+    <p>To use the uploader widget, you need to place a container element in your web page.</p>
+    
+<pre class="prettyprint">
+&lt;div id="foo"&gt;&lt;/div&gt;
+</pre>
+
+    <p>Within your YUI use() function, create an instance of Uploader.</p>
+
+<pre class="prettyprint">
+var uploader = new Y.BP.Uploader({
+    contentBox: 'div#foo',
+    width: '400px',
+    height: '200px',
+    uploadUrl: "http://example.org/upload.php",
+}).render();
+</pre>
+
+<h3>Configuration Options</h3>
+
+<p>
+	Besides the configurations in the code example above, Uploader has a number of other options
+	that can greatly increase upload speed.
+</p>
+
+<table>
+	<tr>
+		<th>Option</th>
+		<th>Description</th>
+	</tr>
+
+	<tr>
+		<td>maxWidth</td>
+		<td>Sets the maximum width an image will be scaled to.  By default, this parameter
+			is 0 which means images will not be scaled.
+		</td>
+	</tr>
+	<tr>
+		<td>maxHeight</td>
+		<td>Sets the maximum height an image will be scaled to.  By default, this parameter
+			is 0 which means images will not be scaled.
+		</td>
+	</tr>
+</table>
+
+			
+    <h2>Code</h2>
+    <p>
+      Get it on github: <a href="http://github.com/lloyd/yajl">http://github.com/lloyd/yajl</a>
+    </p>
+
+    <h2>Support</h2>
+    <p>
+        You can find Yajl on IRC in the <code>#yajl</code> channel on the <a href="http://freenode.net">Freenode</a> network 
+        or you can subscribe to the Yajl mailing list by sending an email to
+        <strong>yajl@librelist.com</strong> (more info on Librelist <a href="http://librelist.com/">here</a>)
+    </p>
+
+    <h2>Download</h2>
+    <p>
+      <ul>
+      <li><a href="http://github.com/lloyd/yajl/zipball/1.0.9">yajl-1.0.9.zip</a>
+      <li><a href="http://github.com/lloyd/yajl/tarball/1.0.9">yajl-1.0.9.tar.gz</a>
+      <li><a href="http://github.com/lloyd/yajl/zipball/master">yajl-trunk.zip</a>
+      <li><a href="http://github.com/lloyd/yajl/tarball/master">yajl-trunk.tar.gz</a>
+       </ul>
+    </p>
+    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
+      by running:
+      <pre class="prettyprint">$ git clone git://github.com/lloyd/yajl</pre>
+    </p>
+
+    <h2>Features</h2>
+
+
+    <h3> Simple Interface </h3>
+
+    <p>
+    Largely because YAJL is event driven, the interface is very concise
+  object oriented C.  The interface is not cluttered with data
+  representation, that bit is left up to higher level code.  Indeed
+  it should be possible to port most existing JSON libraries onto YAJL
+  if so desired.
+    </p>
+
+  <h3> portable </h3>
+    <p>
+        feature 2
+    </p>
+
+    <h2>Example Programmatic Usage In C</h2>
+
+<pre class="prettyprint">
+    JavaScript here
+</pre>
+
+
+
+
+  </div>
+</body>
+
+<script src="../../prettify.js"></script>
+</html>
