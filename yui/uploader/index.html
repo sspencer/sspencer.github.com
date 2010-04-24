@@ -13,38 +13,37 @@
     src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
 
 <div id="container">
-    <h1>
-        <a href="http://github.com/sspencer/yui3-gallery">uploader</a>
-        <span class="small">by <a href="http://github.com/sspencer">sspencer</a></span>
-    </h1>
-    
-    <h2>Overview</h2>
 
-    <p>
+<h1>
+<a href="http://github.com/sspencer/yui3-gallery">uploader</a>
+<span class="small">by <a href="http://github.com/sspencer">sspencer</a></span>
+</h1>
 
-        Uploader is a <a href="http://yuilibrary.com/">YUI 3</a> gallery project that uses
-        <a href="http://browserplus.org/">BrowserPlus</a> to create an advanced file
-        uploader widget. The Uploader allows you to easily create an advanced file uploader
-        widget that supports native drag+drop from the desktop, multiple file selection from
-        a native file selection dialog, multiple simultaneous uploads (3 files at a time),
-        image resizing, archiving (tar, zip) and compression (bzip2, gzip, zip). Files may
-        be filtered by size and mime type (for example, only image files may be selected).
+<h2>Overview</h2>
 
-    </p>
+<p>
+Uploader is a <a href="http://yuilibrary.com/">YUI 3</a> <a
+href="http://developer.yahoo.com/yui/3/widget/">Widget</a> that uses <a
+href="http://browserplus.org/">BrowserPlus</a> to create an advanced file uploader widget. The
+Uploader allows you to easily create an advanced file uploader widget that supports native
+drag+drop from the desktop, multiple file selection from a native file selection dialog, multiple
+simultaneous uploads (3 files at a time), image resizing, archiving (tar, zip) and compression
+(bzip2, gzip, zip). Files may be filtered by size and mime type (for example, only image files
+may be selected).
+</p>
 
-    <p align="center">
-        <img src="uploader-full-reflect.png" width="402" height="265" alt="YUI3 Uploader with BrowserPlus">
-    </p>
+<p align="center">
+<img src="uploader-full-reflect.png" width="402" height="265" alt="YUI3 Uploader with BrowserPlus">
+</p>
 
-    <h2>Getting Started</h2>
-    
+<h2>Getting Started</h2>
 
-    <h3>Include Dependencies</h3>
+<h3>Include Dependencies</h3>
 
-    <p>
-        Since Uploader is a UI element, uses BrowserPlus and YUI3, it requires 
-        both CSS and JavaScript support files.
-    </p>
+<p>
+Since Uploader is a UI element, uses BrowserPlus and YUI3, it requires 
+both CSS and JavaScript support files.
+</p>
 
 <pre class="prettyprint">
 &lt;!-- in HEAD --&gt;
@@ -56,13 +55,13 @@
 &lt;script src="gallery-uploader-min.js"&gt;&lt;/script&gt;
 </pre>
 
-    <h3>The YUI Instance</h3>
+<h3>The YUI Instance</h3>
 
-    <p>
-    Once you have the YUI seed file on your page (yui-min.js), you can create a new YUI instance for your 
-    application to use and populate it with the modules you need, specified as the first set of arguments 
-    to the <a href="http://developer.yahoo.com/yui/3/yui/index.html#use">use method</a>.
-    </p>
+<p>
+Once you have the YUI seed file on your page (yui-min.js), you can create a new YUI instance for your 
+application to use and populate it with the modules you need, specified as the first set of arguments 
+to the <a href="http://developer.yahoo.com/yui/3/yui/index.html#use">use method</a>.
+</p>
 
 <pre class="prettyprint">
 YUI().use('gallery-uploader', function(Y) {
@@ -70,15 +69,19 @@ YUI().use('gallery-uploader', function(Y) {
 }); 
 </pre>
 
-    <h3>Creating a Uploader Widget</h3>
+<h3>Creating a Uploader Widget</h3>
 
-    <p>To use the uploader widget, you need to place a container element in your web page.</p>
+<p>
+To use the uploader widget, you need to place a container element in your web page.
+</p>
     
 <pre class="prettyprint">
 &lt;div id="foo"&gt;&lt;/div&gt;
 </pre>
 
-    <p>Within your YUI use() function, create an instance of Uploader.</p>
+<p>
+Within your YUI use() function, create an instance of Uploader.
+</p>
 
 <pre class="prettyprint">
 var uploader = new Y.BP.Uploader({
@@ -92,80 +95,300 @@ var uploader = new Y.BP.Uploader({
 <h3>Configuration Options</h3>
 
 <p>
-	Besides the configurations in the code example above, Uploader has a number of other options
-	that can greatly increase upload speed.
+Besides the configurations in the code example above, Uploader has a number of other options
+that can greatly increase upload speed.
+</p>
+
+<table>
+    <tr>
+        <th>Option</th>
+        <th>Description</th>
+    </tr>
+
+    <tr>
+        <td>archiveFormat</td>
+        <td>Set the optional archive + compression format.  When set, all files will be archived
+            and compressed (depending on the format) into a single file before upload. 
+            Valid values: ('tar', 'tar-bzip2', 'tar-gzip', 'zip', 'zip-uncompressed').
+        </td>
+    </tr>
+
+    <tr>
+        <td>maxFileSize</td>
+        <td>Maximum size in bytes of a single file.  All filters</td>
+    </tr>
+
+    <tr>
+        <td>mimeTypes</td>
+        <td>The array of allowable file types.  By default, the user can select any type of file.</td>
+    </tr>
+
+    <tr>
+        <td>resizeHeight</td>
+        <td>Sets the maximum height an image will be scaled to.  By default, this parameter
+            is 0 which means images will not be scaled.
+        </td>
+    </tr>
+    <tr>
+        <td>resizeWidth</td>
+        <td>Sets the maximum width an image will be scaled to.  By default, this parameter
+            is 0 which means images will not be scaled.
+        </td>
+    </tr>
+
+    <tr>
+        <td>resizeQuality</td>
+        <td>The quality of the scaled image (0-100, default 80).  Lower qualities result in 
+            faster operations and smaller file sizes, at the cost of image quality.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>timeout</td>
+        <td>An optional integer value between 3 and 240s that places an upper bound in seconds on 
+            how long to wait without being able to send or receive data from the server.  Default
+            is 240s.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>cookie</td>
+        <td>The optional cookie string POSTED with each field uploaded.</td>
+    </tr>
+
+    <tr>
+        <td>fieldName</td>
+        <td> The name of the variable in the POST request containing the file data. "file" by default.</td>
+    </tr>
+
+    <tr>
+        <td>vars</td>
+        <td>Optional data object that is posted with each file uploaded.  This is useful 
+            when the Uploader widget is integrated with a form.
+        </td>
+    </tr>
+    <tr>
+        <td>uploadUrl</td>
+        <td>The URL of the upload script on the server. If this value is not set,
+            files won't be uploaded.
+        </td>
+    </tr>
+</table>
+
+<h2>Events</h2>
+
+<p>
+Besides inherited <a href="http://developer.yahoo.com/yui/3/widget/#uievents">Widget events</a>, Upload
+issues a number of custom events that you as a developer may subscribe and act upon.
+</p>
+
+<table>
+    <tr>
+        <th>Event&nbsp;Name</th>
+        <th>Description</th>
+        <th>Event&nbsp;Data</th>
+    </tr>
+
+    <tr><th colspan="3">File Events</th></tr>
+
+    <tr>
+        <td>fileAdded</td>
+        <td>Called once for every file added through a user action, including
+            <em>drag and drop</em> and the file selection dialog.  You may call
+            e.preventDefault() on the event object to disallow the user from
+            adding the file (you could perform an additional file size or name check).
+        </td>
+        <td>
+            <b>file</b>
+        </td>
+    </tr>
+    <tr>
+        <td>fileRemoved</td>
+        <td>Fire each time the user deletes a file (by pressing on the trash can icon)
+            a file.
+        </td>
+        <td>
+            <b>file</b>
+        </td>
+    </tr>
+    <tr>
+        <td>filesChanged</td>
+        <td>Called after one or more files are added, or after one file has been removed.
+        </td>
+        <td>
+            n/a
+        </td>
+    </tr>
+
+    <tr><th colspan="3">Image Resize Events</th></tr>
+    <tr>
+        <td>resizeStart</td>
+        <td>some long description</td>
+        <td>n/a</td>
+    </tr>
+    <tr>
+        <td>resizeProgress</td>
+        <td>some long description</td>
+        <td><b>file</b>, <b>progress</b></td>
+    </tr>
+    <tr>
+        <td>resizeComplete</td>
+        <td>some long description</td>
+        <td>n/a</td>
+    </tr>
+
+    <tr><th colspan="3">File Archive Events</th></tr>
+    <tr>
+        <td>archiveStart</td>
+        <td>some long description</td>
+        <td>n/a</td>
+    </tr>
+    <tr>
+        <td>archiveProgress</td>
+        <td>some long description</td>
+        <td><b>file</b>, <b>progress</b></td>
+    </tr>
+    <tr>
+        <td>archiveComplete</td>
+        <td>some long description</td>
+        <td>n/a</td>
+    </tr>
+
+    <tr><th colspan="3">Upload Events</th></tr>
+    <tr>
+        <td>uploadStart</td>
+        <td>some long description</td>
+        <td>n/a</td>
+    </tr>
+    <tr>
+        <td>uploadProgress</td>
+        <td>some long description</td>
+        <td><b>file</b>, <b>progress</b></td>
+    </tr>
+    <tr>
+        <td>uploadResponse</td>
+        <td>some long description</td>
+        <td><b>file</b>, <b>response</b></td>
+    </tr>
+    <tr>
+        <td>uploadComplete</td>
+        <td>some long description</td>
+        <td>n/a</td>
+    </tr>
+
+</table>
+
+<h3>Event Object Details</h3>
+<p>formatted code showing example objects</p>
+<pre class="prettyprint">
+// File Object
+file: {
+    name:     "file.jpg",                    // file name
+    size:     54391,                         // file size in bytes
+    mimeType: ["image/jpeg", "image/pjpeg"], // mime types
+    id:       "yui_34312312421"              // dom id of UI element
+};
+
+// Progress Object
+progress: {
+    filePercent: 41,  // <b>ALL</b> progress events
+    fileSent: 98231,  // <b>only</b> upload progress 
+    fileSize: 236983, // <b>only</b> upload progress
+    totalPercent: 41, // <b>ALL</b> progress events
+    totalSent: 98321, // <b>only</b> upload progress
+    totalSize: 236983 // <b>only</b> upload progress
+};
+
+// Response -- "Success"
+response: {
+    body: "response body",
+    headers: {
+        // server dependent list of http response headers, like:
+        // "Content-Length", "Content-Type", "Server", "Date"
+    },
+    statusCode: 200,
+    statusString: "200 OK"
+};
+
+// Response -- Error
+response: {
+    error: "Short Error",
+    verboseError: "Verbose Error"
+};
+</pre>
+
+<h2>Public Methods</h2>
+
+<p>
+To better integrate the Uploader with your HTML form, you may call the following
+methods:
 </p>
 
 <table>
 	<tr>
-		<th>Option</th>
+		<th>Method&nbsp;Name</th>
 		<th>Description</th>
 	</tr>
-
 	<tr>
-		<td>maxWidth</td>
-		<td>Sets the maximum width an image will be scaled to.  By default, this parameter
-			is 0 which means images will not be scaled.
+		<td>sizeInBytes(number)</td>
+		<td>Utility to convert the number of bytes into a human presentable string.  For example, 
+			coverts the number <em>4100</em> into "4 KB".
 		</td>
 	</tr>
 	<tr>
-		<td>maxHeight</td>
-		<td>Sets the maximum height an image will be scaled to.  By default, this parameter
-			is 0 which means images will not be scaled.
+		<td>removeAllFiles()</td>
+		<td>Remove all files from the file list.  Sends a filesChanged event in response.</td>
+	</tr>
+	<tr>
+		<td>disableInput(boolean)</td>
+		<td>Prevents users from adding, removing and uploading files.</td>
+	</tr>
+	<tr>
+		<td>enableAddButton(boolean)</td>
+		<td>Sets the enabled state of the Add button.</td>
+	</tr>
+	<tr>
+		<td>enableUploadutton(boolean)</td>
+		<td>Sets the enabled state of the Upload button.</td>
+	</tr>
+	<tr>
+		<td>disable()</td>
+		<td>Disables the entire Uploader interface.</td>
+	</tr>
+	<tr>
+		<td>enable()</td>
+		<td>Enables the Uploader interface.</td>
+	</tr>
+	<tr>
+		<td>showMessage("message")</td>
+		<td>Overlays a slightly transparent dialog on top of the file upload area.
+			You may use this to implement custom error handling.  For example, 
+			if after the files are compressed and archived, the size is too large,
+			you may notify the user so that he may remove some of the files from
+			the original list.
 		</td>
 	</tr>
-</table>
-
-			
-    <h2>Code</h2>
-    <p>
-      Get it on github: <a href="http://github.com/lloyd/yajl">http://github.com/lloyd/yajl</a>
-    </p>
-
-    <h2>Support</h2>
-    <p>
-        You can find Yajl on IRC in the <code>#yajl</code> channel on the <a href="http://freenode.net">Freenode</a> network 
-        or you can subscribe to the Yajl mailing list by sending an email to
-        <strong>yajl@librelist.com</strong> (more info on Librelist <a href="http://librelist.com/">here</a>)
-    </p>
-
-    <h2>Download</h2>
-    <p>
-      <ul>
-      <li><a href="http://github.com/lloyd/yajl/zipball/1.0.9">yajl-1.0.9.zip</a>
-      <li><a href="http://github.com/lloyd/yajl/tarball/1.0.9">yajl-1.0.9.tar.gz</a>
-      <li><a href="http://github.com/lloyd/yajl/zipball/master">yajl-trunk.zip</a>
-      <li><a href="http://github.com/lloyd/yajl/tarball/master">yajl-trunk.tar.gz</a>
-       </ul>
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre class="prettyprint">$ git clone git://github.com/lloyd/yajl</pre>
-    </p>
-
-    <h2>Features</h2>
+	<tr>
+		<td>hideMessage()</td>
+		<td>Hides the message dialog.  This does not need to be done programmatically,
+			as there is a "Close" link on the dialog.
+		</td>
+	</tr>
+</table>	
 
 
-    <h3> Simple Interface </h3>
+<h2>Code</h2>
+<p>
+Get it on github: <a href="http://github.com/lloyd/yajl">http://github.com/lloyd/yajl</a>
+</p>
 
-    <p>
-    Largely because YAJL is event driven, the interface is very concise
-  object oriented C.  The interface is not cluttered with data
-  representation, that bit is left up to higher level code.  Indeed
-  it should be possible to port most existing JSON libraries onto YAJL
-  if so desired.
-    </p>
-
-  <h3> portable </h3>
-    <p>
-        feature 2
-    </p>
-
-    <h2>Example Programmatic Usage In C</h2>
-
-<pre class="prettyprint">
-    JavaScript here
-</pre>
+<h2>Support</h2>
+<p>
+Support for Uploader is available through the YUILibrary 
+<a href="http://yuilibrary.com/forum/viewforum.php?f=131">Uploader forum</a>.
+If you want to chat in person, you try to catch "steve|s" on Freenode IRC in the
+#browserplus chat room.
+</p>
 
 
 
