@@ -1,15 +1,15 @@
 /* This is just pulled from the default inline style and needs to be replaced */
 body {
-    margin-top: 1.0em;
-    background-color: #fff;
-    font-family:  helvetica,arial,times,serif;
-    color: #111;
-    line-height:1.4em;
+	margin-top: 1.0em;
+	background-color: #fff;
+	font-family:  helvetica,arial,times,serif;
+	color: #111;
+	line-height:1.4em;
 }
 
 #container {
-  margin: 0 auto;
-  width: 700px;
+	margin: 0 auto;
+	width: 700px;
 }
 
 h1 { font-size: 3.4em; margin-bottom: 3px;}
@@ -23,16 +23,23 @@ a { color: #036; }
 .footer { text-align:center; padding-top:30px; font-style: italic; }
 
 pre{
-    font-size:0.9em;
-    padding:4px;
-    border:1px solid #ccc;
-    background:#f8f7f5;
-    line-height:1.2em;
+	font-size:0.9em;
+	padding:4px;
+	border:1px solid #ccc;
+	background:#f8f7f5;
+	line-height:1.2em;
 }
+
+tt {
+    background:#ddd;
+    font-size:1.1em;
+    padding:1px;
+}
+
 table {margin: 10px 0; border: 1px solid #ccd;font-size:85%;border-collapse:collapse;border-spacing:0}
 th {padding: 4px 8px; font-weight: bold; background: #e0e7f0; text-align:center;color:#333;border:1px solid #ccd;}
 td {padding: 4px 5px;background:#f6f9fb;color:#000; border: 1px solid #e3e6e9;vertical-align:top;} 
-
+td a { color:#036; font-weight:bold;}
 
 .str{color:#00f}
 .kwd{color:#369; font-weight:bold;}
@@ -47,16 +54,16 @@ td {padding: 4px 5px;background:#f6f9fb;color:#000; border: 1px solid #e3e6e9;ve
 .dec{color:#606}
 
 @media print{
-  .str{color:#060}
-  .kwd{color:#006;font-weight:bold}
-  .com{color:#600;font-style:italic}
-  .typ{color:#404;font-weight:bold}
-  .lit{color:#044}
-  .pun{color:#440}
-  .pln{color:#000}
-  .tag{color:#006;font-weight:bold}
-  .atn{color:#404}
-  .atv{color:#060}
+	.str{color:#060}
+	.kwd{color:#006;font-weight:bold}
+	.com{color:#600;font-style:italic}
+	.typ{color:#404;font-weight:bold}
+	.lit{color:#044}
+	.pun{color:#440}
+	.pln{color:#000}
+	.tag{color:#006;font-weight:bold}
+	.atn{color:#404}
+	.atv{color:#060}
 }
 
 

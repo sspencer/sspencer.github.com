@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>BrowserPlus File Uploader</title>
+    <link rel="stylesheet" href="../assets/uploader.css" type="text/css" charset="utf-8" />
+	<style type="text/css" media="screen">
+		.buttons {margin:20px;}
+	</style>
+</head>
+<body>
+    <div id="main">
+        <div id="demo" class="sec">
+            <h2>YUI3 Gallery: BrowserPlus File Uploader Demo</h2>
+            <div class="foo"></div>
+			<div class="buttons">
+				<button id="clear_files">Clear Files</button>
+				<button id="enable_uploader">Enable Uploader</button>
+				<button id="disable_uploader">Disable Uploader</button>
+				<br />
+				<button id="show_message">Show Message</button>
+				<button id="hide_message">Hide Message</button>
+			</div>
+        </div>
+    </div>
+</body>
+<script src="http://bp.yahooapis.com/2.7.1/browserplus-min.js"></script>
+<script src="http://yui.yahooapis.com/combo?3.1.0/build/yui/yui-min.js"></script>
+<script src="../build_tmp/gallery-uploader-min.js"></script>
+<script>
+YUI().use('gallery-uploader', function(Y) {
+	var up = new Y.BP.Uploader({contentBox: 'div.foo'
+		, width: "400px"
+		, height: "200px"
+		, uploadUrl: "http://browserplus.org/misc/upload.php"
+		, archiveFormat: 'tar-bzip2'
+		, resizeWidth:400
+	}).render();
+
+	Y.on("click", function(){
+		up.clearFiles();
+	}, "#clear_files");
+
+	Y.on("click", function(){
+		up.enable();
+	}, "#enable_uploader");
+
+	Y.on("click", function(){
+		up.disable();
+	}, "#disable_uploader");
+	
+	Y.on("click", function(){
+		up.showMessage("Hi from Demo1");
+	}, "#show_message");
+
+	Y.on("click", function(){
+		up.hideMessage();
+	}, "#hide_message");
+
+	var events = [
+		// "fileAdded",
+		// "fileRemoved",
+		// "fileChanged",
+		"resizeStart",
+		//"resizeProgress",
+		// "resizeComplete",
+		"archiveStart",
+		//"archiveProgress",
+		// "archiveComplete",
+		"uploadStart",
+		//"uploadProgress",
+		//"uploadResponse",
+		// "uploadComplete"
+	];
+	
+	Y.Array.each(events, function(v){
+		up.on(v, function(e) {
+			Y.log("Event: " + e.type);
+			if (e.files) {
+				Y.log("Files Size: " + up.getSize(e.files));
+			}
+			if (e.file) { Y.log("    file: " + e.file.name); }
+			if (e.progress) { Y.log("    filePercent: " + e.progress.filePercent + ", totalPercent: " + e.progress.totalPercent); }
+			if (e.response) { Y.log(e.response.data); }
+		});
+	});
+
+});
+</script>
+</html>

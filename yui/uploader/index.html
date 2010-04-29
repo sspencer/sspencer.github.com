@@ -33,7 +33,9 @@ may be selected).
 </p>
 
 <p align="center">
+<a href="examples/demo.html">
 <img src="uploader-full-reflect.png" width="402" height="265" alt="YUI3 Uploader with BrowserPlus">
+</a>
 </p>
 
 <h2>Getting Started</h2>
@@ -193,87 +195,89 @@ issues a number of custom events that you as a developer may subscribe and act u
 
     <tr>
         <td>fileAdded</td>
-        <td>Called once for every file added through a user action, including
-            <em>drag and drop</em> and the file selection dialog.  You may call
-            e.preventDefault() on the event object to disallow the user from
-            adding the file (you could perform an additional file size or name check).
+        <td>Fire once for every file added (through <em>drag and drop</em> or file selection dialog).  
+            Preventing this event stops the file from being added to the UI.
         </td>
-        <td>
-            <b>file</b>
-        </td>
+        <td><em>preventable</em>, <a href="#evtfile">file</a></td>
     </tr>
     <tr>
         <td>fileRemoved</td>
-        <td>Fire each time the user deletes a file (by pressing on the trash can icon)
-            a file.
+        <td>Fired each time the user deletes a file (by pressing on the trash can icon).
+            Preventing this event stops the file from being removed from the UI.
         </td>
-        <td>
-            <b>file</b>
-        </td>
+        <td><em>preventable</em>, <a href="#evtfile">file</a></td>
     </tr>
     <tr>
         <td>filesChanged</td>
-        <td>Called after one or more files are added, or after one file has been removed.
+        <td>Fired after one or more files are added, or after one file has been removed.
         </td>
-        <td>
-            n/a
-        </td>
+        <td>n/a</td>
     </tr>
 
     <tr><th colspan="3">Image Resize Events</th></tr>
     <tr>
         <td>resizeStart</td>
-        <td>some long description</td>
-        <td>n/a</td>
+        <td>First event fired after user clicks on the Upload button. Fired whether or not there are images to be resized.</b>
+        <td><em>preventable</em>, <a href="#evtfiles">files</a></td>
     </tr>
     <tr>
         <td>resizeProgress</td>
-        <td>some long description</td>
-        <td><b>file</b>, <b>progress</b></td>
+        <td>Provides progress during image resizing.  Only fired if images are actually resized.</td>
+        <td><a href="#evtfile">file</a>, <a href="#evtprogress">progress</a></td>
     </tr>
     <tr>
         <td>resizeComplete</td>
-        <td>some long description</td>
+        <td>Fire at end of resize stage, whether or not images are resized.</td>
         <td>n/a</td>
     </tr>
 
     <tr><th colspan="3">File Archive Events</th></tr>
     <tr>
         <td>archiveStart</td>
-        <td>some long description</td>
-        <td>n/a</td>
+        <td>Fired after resizeComplete, whether or not files go through archiving/compression stage.  Can <em>prevent</em>
+        to stop uploading.</td>
+        <td><em>preventable</em>, <a href="#evtfiles">files</a></td>
     </tr>
     <tr>
         <td>archiveProgress</td>
-        <td>some long description</td>
-        <td><b>file</b>, <b>progress</b></td>
+        <td>Provides progress during file archiving/compression.  Only fired if archiving option is on.</td>
+        <td><a href="#evtfile">file</a>, <a href="#evtprogress">progress</a></td>
     </tr>
     <tr>
         <td>archiveComplete</td>
-        <td>some long description</td>
+        <td>Fired at end of archiving stage, whether or not files are archived.</td>
         <td>n/a</td>
     </tr>
 
     <tr><th colspan="3">Upload Events</th></tr>
     <tr>
         <td>uploadStart</td>
-        <td>some long description</td>
-        <td>n/a</td>
+        <td>Fired after archiveComplete.  Can <em>prevent</em> to stop uploading.</td>
+        <td><em>preventable</em>, <a href="#evtfiles">files</a></td>
     </tr>
     <tr>
         <td>uploadProgress</td>
-        <td>some long description</td>
-        <td><b>file</b>, <b>progress</b></td>
+        <td>Provides progress during file uploading.  Note if more than 1 file is being uploaded (files
+            are not archived), you will get interleaved progress events for multiple files because files
+            are uploaded simultaneously.  These progress events send more details than the resize and
+            archive progress events.
+        </td>
+        <td><a href="#evtfile">file</a>, <a href="#evtprogress2">progress</a></td>
     </tr>
     <tr>
         <td>uploadResponse</td>
-        <td>some long description</td>
-        <td><b>file</b>, <b>response</b></td>
+        <td>Fire after each file is uploaded, successfully or not.  To check for a successful upload,
+            check for both response.success and the response.data.statusCode or some other response 
+            from your server.
+        </td>
+        <td><a href="#evtfile">file</a>, <a href="#evtresponse">progress</a></td>
     </tr>
     <tr>
         <td>uploadComplete</td>
-        <td>some long description</td>
-        <td>n/a</td>
+        <td>Fire when all files are uploaded.  Default action is to show the "messagePane" with 
+        "strings.upload_complete" message, which the user has to manually dismiss.  This event
+        may be prevented if you want to provide a different "upload complete" experience.
+        <td><em>preventable</em>, n/a</td>
     </tr>
 
 </table>
@@ -281,6 +285,7 @@ issues a number of custom events that you as a developer may subscribe and act u
 <h3>Event Object Details</h3>
 <p>formatted code showing example objects</p>
 <pre class="prettyprint">
+<a name="evtfile"></a>
 // File Object
 file: {
     name:     "file.jpg",                    // file name
@@ -289,105 +294,84 @@ file: {
     id:       "yui_34312312421"              // dom id of UI element
 };
 
-// Progress Object
+<a name="evtfiles"></a>
+// Files object - array of File objects (see above)
+files: [ 
+    file1, 
+    file2, 
+    ...
+];
+
+
+<a name="evtprogress"></a>
+// Progress Object (for resizing / archiving)
 progress: {
-    filePercent: 41,  // <b>ALL</b> progress events
-    fileSent: 98231,  // <b>only</b> upload progress 
-    fileSize: 236983, // <b>only</b> upload progress
-    totalPercent: 41, // <b>ALL</b> progress events
-    totalSent: 98321, // <b>only</b> upload progress
-    totalSize: 236983 // <b>only</b> upload progress
+    filePercent: 41, 
+    totalPercent: 41
 };
 
-// Response -- "Success"
-response: {
-    body: "response body",
-    headers: {
-        // server dependent list of http response headers, like:
-        // "Content-Length", "Content-Type", "Server", "Date"
-    },
-    statusCode: 200,
-    statusString: "200 OK"
+<a name="evtprogress2"></a>
+// Progress Object (for uploading)
+progress: {
+    filePercent: 41, 
+    fileSent: 98231, 
+    fileSize: 236983,
+    totalPercent: 41,
+    totalSent: 98321,
+    totalSize: 236983
 };
 
-// Response -- Error
+<a name="evtresponse"></a>
+// Response 
 response: {
-    error: "Short Error",
-    verboseError: "Verbose Error"
-};
+    success: true,
+    
+    // --- IF SUCCESS TRUE ---
+    data: {
+        body: "response body",
+        headers: {
+            "Content-Length": 123,
+            "Content-Type": "text/plain",
+            ...
+        },
+        statusCode: 200,
+        statusString: "200 OK"
+    }
+    
+    // --- IF SUCCESS FALSE ---
+    data: {
+        error: "Short Error",
+        verboseError: "Verbose Error"
+    }
+}
 </pre>
 
-<h2>Public Methods</h2>
+<h2>API</h2>
 
 <p>
-To better integrate the Uploader with your HTML form, you may call the following
-methods:
+To view the full set of public methods and events, please see the <a href="api/Uploader.html">Uploader API</a>.
 </p>
 
-<table>
-	<tr>
-		<th>Method&nbsp;Name</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td>sizeInBytes(number)</td>
-		<td>Utility to convert the number of bytes into a human presentable string.  For example, 
-			coverts the number <em>4100</em> into "4 KB".
-		</td>
-	</tr>
-	<tr>
-		<td>removeAllFiles()</td>
-		<td>Remove all files from the file list.  Sends a filesChanged event in response.</td>
-	</tr>
-	<tr>
-		<td>disableInput(boolean)</td>
-		<td>Prevents users from adding, removing and uploading files.</td>
-	</tr>
-	<tr>
-		<td>enableAddButton(boolean)</td>
-		<td>Sets the enabled state of the Add button.</td>
-	</tr>
-	<tr>
-		<td>enableUploadutton(boolean)</td>
-		<td>Sets the enabled state of the Upload button.</td>
-	</tr>
-	<tr>
-		<td>disable()</td>
-		<td>Disables the entire Uploader interface.</td>
-	</tr>
-	<tr>
-		<td>enable()</td>
-		<td>Enables the Uploader interface.</td>
-	</tr>
-	<tr>
-		<td>showMessage("message")</td>
-		<td>Overlays a slightly transparent dialog on top of the file upload area.
-			You may use this to implement custom error handling.  For example, 
-			if after the files are compressed and archived, the size is too large,
-			you may notify the user so that he may remove some of the files from
-			the original list.
-		</td>
-	</tr>
-	<tr>
-		<td>hideMessage()</td>
-		<td>Hides the message dialog.  This does not need to be done programmatically,
-			as there is a "Close" link on the dialog.
-		</td>
-	</tr>
-</table>	
 
+<h2>Demo</h2>
+
+<p>Since Uploader requires <a href="http://browserplus.org/">BrowserPlus</a> to function, Uploader will ask
+	you to install it when the demo runs. <a href="examples/demo.html">Run Demo</a>
+</p>
 
 <h2>Code</h2>
+
 <p>
-Get it on github: <a href="http://github.com/lloyd/yajl">http://github.com/lloyd/yajl</a>
+Uploader source is available on GitHub: 
+<a href="http://github.com/sspencer/yui3-gallery/tree/master/src/gallery-uploader/">http://github.com/sspencer/yui3-gallery</a>
 </p>
 
 <h2>Support</h2>
 <p>
 Support for Uploader is available through the YUILibrary 
 <a href="http://yuilibrary.com/forum/viewforum.php?f=131">Uploader forum</a>.
-If you want to chat in person, you try to catch "steve|s" on Freenode IRC in the
-#browserplus chat room.
+If you want to chat in person, you try to catch <tt>steve|s</tt> on Freenode IRC in the
+<tt>#browserplus</tt> chat room.
 </p>
 
 
