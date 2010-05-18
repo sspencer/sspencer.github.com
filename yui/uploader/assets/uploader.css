@@ -13,7 +13,7 @@
 }
 
 .yui3-upload-disabled {
-    background:red;
+    background:#ddd;
 }
 
 .yui3-uploader-content {
@@ -101,7 +101,7 @@
 }
 
 .yui3-uploader-hover {
-    background:#ce9;
+    background:#def;
 	filter:alpha(opacity=55);
 	opacity: 0.55;
 }
